@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f2ed;
+      --text: #1a1a1a;
+      --muted: #777;
+      --accent: #c0392b;
+      --border: #ddd8d0;
+      --card: #efeae3;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* MAIN LAYOUT */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 8rem 2rem 6rem;
+    }
+
+    section {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; border-bottom: none; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .hero-text h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-text p {
+      color: #444;
+      max-width: 520px;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-photo {
+      width: 150px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: grayscale(15%);
+    }
+
+    .hero-photo-placeholder {
+      width: 150px;
+      height: 180px;
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-align: center;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* LINKS ROW */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.6rem;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.78rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--text);
+      text-decoration: none;
+      background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .link-pill:hover {
+      background: var(--card);
+      border-color: #bbb;
+    }
+
+    /* SECTION HEADERS */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ABOUT */
+    .about-text p {
+      color: #444;
+      margin-bottom: 0.9rem;
+    }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 2rem; }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .pub-thumb {
+      width: 64px;
+      height: 64px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .pub-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-authors {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-authors strong { color: var(--text); font-weight: 500; }
+
+    .pub-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .tag.venue {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .tag.award {
+      background: #fdf3e7;
+      border-color: #e8c88a;
+      color: #8a6320;
+    }
+
+    .tag-link {
+      font-size: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.2rem 0;
+    }
+
+    .tag-link:hover { text-decoration: underline; }
+
+    /* PROJECTS */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      padding: 1.5rem;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .project-card:hover { background: var(--card); }
+
+    .project-card:nth-child(even) { border-right: none; }
+    .project-card:nth-last-child(-n+2) { border-bottom: none; }
+
+    .project-lang {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-title {
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+    }
+
+    .project-link:hover { border-color: var(--text); }
+
+    /* CONTACT */
+    .contact-text {
+      color: #444;
+      margin-bottom: 1.5rem;
+      max-width: 480px;
+    }
+
+    .contact-email {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.5rem; }
+      main { padding: 6rem 1.5rem 4rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-photo-placeholder, .hero-photo { display: none; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Your Name</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="about">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Your Name<br><em>ML Researcher</em></h1>
+        <p>
+          MS student in Machine Learning at the University of Tübingen. 
+          Interested in [your research interest — e.g. representation learning, LLM evaluation, computer vision].
+        </p>
+        <p>
+          Previously worked on [X]. Currently exploring [Y].
+          Based in Tübingen, Germany.
+        </p>
+        <div class="links-row">
+          <a href="mailto:you@email.com" class="link-pill">✉ Email</a>
+          <a href="#" class="link-pill">↗ CV</a>
+          <a href="https://github.com/yourusername" class="link-pill">⌥ GitHub</a>
+          <a href="https://scholar.google.com" class="link-pill">◎ Scholar</a>
+          <a href="https://linkedin.com/in/yourprofile" class="link-pill">in LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-photo-placeholder">your<br>photo<br>here</div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <p class="section-label">Publications</p>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <div class="pub-thumb">fig</div>
+        <div>
+          <div class="pub-title">Your Paper Title: A Study of Something Interesting in ML</div>
+          <div class="pub-authors">Co-author A*, <strong>Your Name*</strong>, Supervisor Name</div>
+          <div class="pub-tags">
+            <span class="tag venue">NeurIPS 2025</span>
+            <span class="tag award">★ Best Paper</span>
+            <a href="#" class="tag-link">Paper →</a>
+            <a href="#" class="tag-link">Code →</a>
+            <a href="#" class="tag-link">Website →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-thumb">fig</div>
+        <div>
+          <div class="pub-title">Another Paper on a Related Topic with Interesting Findings</div>
+          <div class="pub-authors">Co-author B*, <strong>Your Name*</strong>, Co-author C, Advisor Name</div>
+          <div class="pub-tags">
+            <span class="tag venue">ICML 2025</span>
+            <a href="#" class="tag-link">Paper →</a>
+            <a href="#" class="tag-link">Code →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-thumb">fig</div>
+        <div>
+          <div class="pub-title">A Workshop Paper or Preprint You're Proud Of</div>
+          <div class="pub-authors"><strong>Your Name</strong>, Collaborator Name</div>
+          <div class="pub-tags">
+            <span class="tag venue">arXiv 2024</span>
+            <a href="#" class="tag-link">Paper →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <div class="project-lang">Python · PyTorch</div>
+        <div class="project-title">Project Name One</div>
+        <div class="project-desc">Short description of what this does, why it's interesting, and what you learned from building it.</div>
+        <a href="#" class="project-link">github →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-lang">Python · Transformers</div>
+        <div class="project-title">Project Name Two</div>
+        <div class="project-desc">Another project — maybe a course project or a personal experiment. Keep it to 2–3 sentences.</div>
+        <a href="#" class="project-link">github →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-lang">JavaScript · D3</div>
+        <div class="project-title">Project Name Three</div>
+        <div class="project-desc">A visualization or tool you built. ML students often have cool data viz projects worth showing.</div>
+        <a href="#" class="project-link">demo →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-lang">Python · JAX</div>
+        <div class="project-title">Project Name Four</div>
+        <div class="project-desc">A reimplementation of a paper, a Kaggle project, or something from your coursework at Tübingen.</div>
+        <a href="#" class="project-link">github →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <p class="contact-text">
+      I'm always happy to chat about research, collaborations, or anything ML-related. 
+      Feel free to reach out.
+    </p>
+    <a href="mailto:you@uni-tuebingen.de" class="contact-email">you@uni-tuebingen.de</a>
+  </section>
+
+</main>
+
+<footer>
+  built with html · hosted on github pages · © 2025 your name
+</footer>
+
+</body>
+</html>
